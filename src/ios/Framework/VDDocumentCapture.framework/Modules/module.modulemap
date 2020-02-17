@@ -1,0 +1,6 @@
+framework module VDDocumentCapture {
+  umbrella header "VDDocumentCapture.h"
+
+  export *
+  module * { export * }
+}

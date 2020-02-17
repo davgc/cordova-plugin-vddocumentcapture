@@ -1,0 +1,1 @@
+Veridas  VDDocumentCapture IOS SDK 3.6.0 Cordova Plugin

@@ -1,0 +1,11 @@
+{
+  "name": "cordova-plugin-vddocumentcapture",
+  "version": "1.0.0",
+  "cordova": {
+    "id": "cordova-plugin-vddocumentcapture",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "description": "Veridas VDDocumentCapture SDK Cordova Plugin"
+}

@@ -1,0 +1,6 @@
+framework module ImageProcessing {
+  umbrella header "ImageProcessing.h"
+
+  export *
+  module * { export * }
+}
