@@ -12,7 +12,6 @@ CDVVDDocumentCapture* parent;
 NSArray<NSString *>* _docTypes;
 NSMutableDictionary* _config;
 
-
 - (UIViewController *)initWithTarget:(CDVVDDocumentCapture*)myParent andConfig:(NSMutableDictionary*)config andDocTypes:(NSArray<NSString *>*)docTypes
 {
     _docTypes = docTypes;
@@ -23,16 +22,7 @@ NSMutableDictionary* _config;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-   
-//      NSMutableArray<NSString *> * _documents = [NSMutableArray new];
-//      [_documents addObject:@"DNI20"];
-//      [_documents addObject:@"DNI30"];
-
-//    NSMutableDictionary* config = [NSMutableDictionary new];
-//    [config setValue:@"YES" forKey:@"closebutton"];
-    
-       //VDDocumentCaptureConfig* config2 = [VDDocumentCaptureConfig parseOptions:_config];
-    
+      
       if (![VDDocumentCapture isStarted]) {
           // Here a call with options can be made.
           
@@ -48,7 +38,8 @@ NSMutableDictionary* _config;
 - (void) stopFramework {
   // Stop it whenever you want.  VDDocumentCapture.stop();
     [VDDocumentCapture stop];
-    [VDView dismissViewControllerAnimated:NO completion:nil];
+            
+    [VDView dismissViewControllerAnimated:YES completion:nil];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 // Protocol methods.
@@ -65,6 +56,7 @@ NSMutableDictionary* _config;
 - (void) VDDocumentAllFinished:(Boolean)processFinished {
     // When the framework ends, proceed as needed.
      NSLog(@"Document Finished");
+    [parent VDDocumentAllFinished:processFinished];
     [self stopFramework];
 }
 // Called when the number of seconds passed without taking the photo.

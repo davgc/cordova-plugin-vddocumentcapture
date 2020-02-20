@@ -23,11 +23,11 @@
     
     if (docTypes == NULL){
          pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                                   messageAsDictionary:@{@"type":@"msg",@"msg":@"missing mandatory parameters!"}];
+                                      messageAsDictionary:@{@"type":@"msg",@"msg":@"Missing mandatory parameters",@"errorCode":@"E001"}];
     }else{
-       
+    
          pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                            messageAsDictionary:@{@"type":@"msg",@"msg":@"ok"}];
+                                            messageAsDictionary:@{@"type":@"status",@"code":@"PROCESS_INITIATED"}];
     }
     
     [pluginResult setKeepCallback:[NSNumber numberWithBool:YES]];
@@ -45,32 +45,42 @@
 
 - (void) VDDocumentCaptured:(NSData *) imageData withCaptureType:(VDCaptureType) captureType
       andDocument:(NSArray<VDDocument *> *) document {
-  // Do with image as needed.
-    NSLog(@"Document Captured");
     
     NSString* base64Img = [self base64forData:imageData];
     NSString* captureTypeStr = [self getCaptureType:captureType];
     
     CDVPluginResult* pluginResult = [CDVPluginResult
                                      resultWithStatus:CDVCommandStatus_OK
-                                     messageAsDictionary:@{@"imageData":base64Img,
+                                     messageAsDictionary:@{@"type":@"status",
+                                                           @"code":@"DOCUMENT_CAPTURED",
+                                                           @"imageData":base64Img,
                                                            @"captureType":captureTypeStr,
                                                            @"document":document.description}];
-    
-
-   
+       
     [pluginResult setKeepCallback:[NSNumber numberWithBool:YES]];
-    
     [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
-    
-    
-    
         
 }
 
+- (void) VDTimeWithoutPhotoTaken:(int)seconds withCaptureType:(VDCaptureType)capture {
+    
+    CDVPluginResult* pluginResult;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                        messageAsDictionary:@{@"type":@"msg",@"msg":@"Timeout",@"errorCode":@"E002"}];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
+}
+
+- (void) VDDocumentAllFinished:(Boolean)processFinished {
+    CDVPluginResult* pluginResult;
+       pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                           messageAsDictionary:@{@"type":@"status",@"code":@"PROCESS_FINISHED"}];
+       [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
+}
+
+
 - (NSString*)getCaptureType:(VDCaptureType)captureType{
     
-     NSString *result = nil;
+    NSString *result = nil;
     switch (captureType) {
             case VD_OBVERSE_WITH_FLASH:
                 result = @"VD_OBVERSE_WITH_FLASH";
@@ -87,7 +97,7 @@
             case VD_REVERSE_WITHOUT_FLASH:
                 result = @"VD_REVERSE_WITHOUT_FLASH";
             break;
-           
+            
             default:
                 result = nil;
             break;
@@ -115,14 +125,12 @@
                 value |= (0xFF & input[j]);
             }
         }
-
         NSInteger theIndex = (i / 3) * 4;
         output[theIndex + 0] =                    table[(value >> 18) & 0x3F];
         output[theIndex + 1] =                    table[(value >> 12) & 0x3F];
         output[theIndex + 2] = (i + 1) < length ? table[(value >> 6)  & 0x3F] : '=';
         output[theIndex + 3] = (i + 2) < length ? table[(value >> 0)  & 0x3F] : '=';
     }
-
     return [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding] ;
 }
 

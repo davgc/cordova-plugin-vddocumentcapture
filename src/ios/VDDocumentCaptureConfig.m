@@ -8,11 +8,7 @@
 {
     if (self = [super init]) {
         // default values
-        self.closebutton = YES;
-        self.obverseflash = YES;
-        self.reverseflash = YES;
-        self.showdocument = YES;
-        self.showtutorial = YES;
+      
     }
 
     return self;

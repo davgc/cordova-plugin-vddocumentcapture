@@ -23,11 +23,6 @@
 
     <preference name="CAMERA_PERMISION" default="This app wants to get your location while this app runs only."/>
 
-    <!-- <preference name="LOCATION_WHEN_IN_USE_DESCRIPTION" default="This app wants to get your location while this app runs only."/>
-    <preference name="LOCATION_ALWAYS_USAGE_DESCRIPTION" default="This app wants to get your location always, even this app runs in background."/>
-    <preference name="MOTION_USAGE_DESCRIPTION" default="This app wants to get your motion."/> -->
-
-
         <js-module src="www/plugin.js" name="plugin">
             <runs/>
             <clobbers target="CDVVDDocumentCapture" />
@@ -42,31 +37,20 @@
          <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
           <string>$CAMERA_PERMISION</string>
          </config-file>
-         
-
-        <!-- <dependency id="cordova-plugin-cocoapod-support"/> -->
-
-
-        <pods-config ios-min-version="9.0" use-frameworks="true">
-             <!-- optionally add private spec sources -->
-        </pods-config>
-
-        <!-- <pod name="AFNetworking" spec="~> 3"/>
-        <pod name="JSONModel" spec="~> 1.2"/>
-        <pod name="ISO8601" spec="~> 0.6"/> -->
-
+        
+       
+        <dependency url="https://github.com/davgc/cordova-plugin-vdcore.git"/>
+     
         <header-file src="src/ios/CDVVDDocumentCapture.h" />
         <source-file src="src/ios/CDVVDDocumentCapture.m" />
-         <header-file src="src/ios/VDDocumentCaptureConfig.h" />
+        <header-file src="src/ios/VDDocumentCaptureConfig.h" />
         <source-file src="src/ios/VDDocumentCaptureConfig.m" />
         <header-file src="src/ios/VDWebView.h" />
         <source-file src="src/ios/VDWebView.m" />
 
-        <framework src="src/ios/Framework/ImageProcessing.framework" weak="true" embed="true" custom="true"/>
-        <framework src="src/ios/Framework/VDDocumentCapture.framework"  weak="true" embed="true" custom="true"/>
-        <framework src="src/ios/Framework/VDLibrary.framework"  weak="true" embed="true" custom="true"/>
-        <framework src="src/ios/Framework/ZipArchive.framework"  weak="true" embed="true" custom="true"/>
-        
+   
+        <framework src="src/ios/Framework/VDDocumentCapture.framework" embed="true" custom="true"/>
+
 
     </platform>
 </plugin>

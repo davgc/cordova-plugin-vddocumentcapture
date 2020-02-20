@@ -14,6 +14,7 @@
                 andDocument:(NSArray<VDDocument *> *) document;
 
 - (void) VDTimeWithoutPhotoTaken:(int)seconds withCaptureType:(VDCaptureType)capture;
+- (void) VDDocumentAllFinished:(Boolean)processFinished;
 
 @end
 
