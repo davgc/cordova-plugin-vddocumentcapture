@@ -39,7 +39,7 @@
          </config-file>
         
        
-        <dependency id="cordova-plugin-vdcore" url="https://github.com/davgc/cordova-plugin-vdcore.git"/>
+        <dependency id="cordova-plugin-vdcore" url="https://github.com/davgc/cordova-plugin-vdcore.git#ios-only"/>
      
         <header-file src="src/ios/CDVVDDocumentCapture.h" />
         <source-file src="src/ios/CDVVDDocumentCapture.m" />
